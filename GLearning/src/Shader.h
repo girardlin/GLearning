@@ -25,7 +25,10 @@ private:
 
 public:
 	Shader(const std::string& filepath);
+	Shader();
 	~Shader();
+
+	void AssignData(const std::string& filepath);
 
 	void Bind() const;
 	void Unbind() const;

@@ -8,9 +8,31 @@ Shader::Shader(const std::string& filepath)
 	m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
 }
 
+Shader::Shader()
+	: m_FilePath(""), m_RendererID(0)
+{
+
+}
+
 Shader::~Shader()
 {
 	GLCall(glDeleteProgram(m_RendererID));
+}
+
+void Shader::AssignData(const std::string& filepath)
+{
+	if (m_RendererID == 0)
+	{
+		m_FilePath = filepath;
+		ShaderProgramSource source = ParseShader(filepath);
+		m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
+	}
+	else
+	{
+		std::cout << "[Shader Error] Assigning data to initialized shader." << std::endl;
+		ASSERT(false);
+	}
+
 }
 
 ShaderProgramSource Shader::ParseShader(const std::string& filepath)
