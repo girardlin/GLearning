@@ -8,8 +8,6 @@
 #include "IndexBuffer.h"
 #include "Shader.h"
 
-#include "Renderer.h"
-
 namespace test {
 	
 	class TestTriangle : public Test
@@ -18,15 +16,15 @@ namespace test {
 		float m_Vertices[18];
 		unsigned int m_Index[3];
 
-		VertexBuffer m_VertexBuffer;
-		VertexBufferLayout m_VertexBufferLayout;
-		VertexArray m_VertexArray;
+		VertexBuffer* m_VertexBuffer;
+		VertexBufferLayout* m_VertexBufferLayout;
+		VertexArray* m_VertexArray;
 
-		IndexBuffer m_IndexBuffer;
+		IndexBuffer* m_IndexBuffer;
 
-		Shader m_Shader;
+		Shader* m_Shader;
 
-		Renderer m_Renderer;
+		Renderer* m_Renderer;
 
 	public:
 		TestTriangle();

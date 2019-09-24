@@ -22,6 +22,8 @@
 #include "imgui_impl_glfw_gl3.h"
 
 #include "tests/TestClearColor.h"
+#include "tests/TestTriangle.h"
+#include "tests/TestTexture.h"
 
 #define ASSERT(x) if (!(x)) __debugbreak();
 #define GLCall(x) GLClearError();x;ASSERT(GLLogCall(#x, __FILE__, __LINE__))
@@ -57,43 +59,58 @@ int main(void)
 	GLCall(glEnable(GL_BLEND));
 	GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
-	/* instantiate renderer */
-	Renderer renderer;
-
-	/* imgui context creation and intialization */
-	ImGui::CreateContext();
-	ImGui_ImplGlfwGL3_Init(window, true);
-	ImGui::StyleColorsDark();
-
-	test::TestClearColor test;
-
-	/* Loop until the user closes the window */
-	while (!glfwWindowShouldClose(window))
 	{
-		/* Render loop */
-		renderer.Clear();
+		/* instantiate renderer */
+		Renderer renderer;
 
-		/* Test setup */
-		test.OnUpdate(0.0f);
-		test.OnRender();
+		/* imgui context creation and intialization */
+		ImGui::CreateContext();
+		ImGui_ImplGlfwGL3_Init(window, true);
+		ImGui::StyleColorsDark();
 
-		/* imgui frame creation */
-		ImGui_ImplGlfwGL3_NewFrame();
+		test::Test* currentTest = nullptr;
+		test::TestMenu* testMenu = new test::TestMenu(currentTest);
+		currentTest = testMenu;
 
-		/* imgui test rendering */
-		test.OnImGuiRender();
+		testMenu->RegisterTest<test::TestClearColor>("Clear Color");
+		testMenu->RegisterTest<test::TestTexture>("Texture");
+		testMenu->RegisterTest<test::TestTriangle>("Triangle");
 
-		/* imgui render call */
-		ImGui::Render();
-		ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
+		/* Loop until the user closes the window */
+		while (!glfwWindowShouldClose(window))
+		{
+			/* Render loop */
+			GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
+			renderer.Clear();
 
-		/* Swap front and back buffers */
-		glfwSwapBuffers(window);
+			/* imgui frame creation */
+			ImGui_ImplGlfwGL3_NewFrame();
+			if (currentTest)
+			{
+				currentTest->OnUpdate(0.0f);
+				currentTest->OnRender();
+				ImGui::Begin("Test");
+				if (currentTest != testMenu && ImGui::Button("<--- Back"))
+				{
+					delete currentTest;
+					currentTest = testMenu;
+				}
+				currentTest->OnImGuiRender();
+				ImGui::End();
+			}
 
-		/* Poll for and process events */
-		glfwPollEvents();
+			/* imgui render call */
+			ImGui::Render();
+			ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
+
+			/* Swap front and back buffers */
+			glfwSwapBuffers(window);
+
+			/* Poll for and process events */
+			glfwPollEvents();
+		}
+		delete testMenu;
 	}
-
 	/* cleanup */
 	ImGui_ImplGlfwGL3_Shutdown();
 	ImGui::DestroyContext();
