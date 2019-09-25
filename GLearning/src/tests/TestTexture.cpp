@@ -1,4 +1,5 @@
 #include "TestTexture.h"
+
 #include "imgui.h"
 
 namespace test {
@@ -27,7 +28,7 @@ namespace test {
 		/* Shader setup */
 		m_Shader = new Shader("res/shaders/Basic.shader");
 
-		m_Texture = new Texture("res/textures/snoop.jpg");
+		m_Texture = new Texture("res/textures/gallade.png");
 		m_Texture->Bind();
 		m_Shader->Bind();
 		m_Shader->SetUniform1i("u_Texture", 0);
@@ -65,6 +66,6 @@ namespace test {
 
 	void TestTexture::OnImGuiRender()
 	{
-
+		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	}
 }

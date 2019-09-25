@@ -24,6 +24,7 @@
 #include "tests/TestClearColor.h"
 #include "tests/TestTriangle.h"
 #include "tests/TestTexture.h"
+#include "tests/Test2DTransform.h"
 
 #define ASSERT(x) if (!(x)) __debugbreak();
 #define GLCall(x) GLClearError();x;ASSERT(GLLogCall(#x, __FILE__, __LINE__))
@@ -75,6 +76,7 @@ int main(void)
 		testMenu->RegisterTest<test::TestClearColor>("Clear Color");
 		testMenu->RegisterTest<test::TestTexture>("Texture");
 		testMenu->RegisterTest<test::TestTriangle>("Triangle");
+		testMenu->RegisterTest<test::Test2DTransform>("2D Transform");
 
 		/* Loop until the user closes the window */
 		while (!glfwWindowShouldClose(window))
@@ -89,7 +91,7 @@ int main(void)
 			{
 				currentTest->OnUpdate(0.0f);
 				currentTest->OnRender();
-				ImGui::Begin("Test");
+				ImGui::Begin("Test Menu");
 				if (currentTest != testMenu && ImGui::Button("<--- Back"))
 				{
 					delete currentTest;

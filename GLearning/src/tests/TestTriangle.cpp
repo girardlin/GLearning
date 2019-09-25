@@ -1,4 +1,5 @@
 #include "TestTriangle.h"
+
 #include "imgui.h"
 
 namespace test {
@@ -56,6 +57,6 @@ namespace test {
 
 	void TestTriangle::OnImGuiRender() 
 	{
-
+		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	}
 }
