@@ -25,6 +25,7 @@
 #include "tests/TestTriangle.h"
 #include "tests/TestTexture.h"
 #include "tests/Test2DTransform.h"
+#include "tests/Test3DCube.h"
 
 #define ASSERT(x) if (!(x)) __debugbreak();
 #define GLCall(x) GLClearError();x;ASSERT(GLLogCall(#x, __FILE__, __LINE__))
@@ -77,6 +78,7 @@ int main(void)
 		testMenu->RegisterTest<test::TestTexture>("Texture");
 		testMenu->RegisterTest<test::TestTriangle>("Triangle");
 		testMenu->RegisterTest<test::Test2DTransform>("2D Transform");
+		testMenu->RegisterTest<test::Test3DCube>("3D Cube");
 
 		/* Loop until the user closes the window */
 		while (!glfwWindowShouldClose(window))

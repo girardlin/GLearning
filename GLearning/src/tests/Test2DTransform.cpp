@@ -12,16 +12,16 @@ namespace test {
 						-50.5f,  50.5f,  0.0f,  1.0f },
 						m_Index{ 0, 1, 2, 2, 3, 0 }
 	{
-		/* matrix setup */
-		m_ProjectionMatrix = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
-		m_ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
+		/* matrix values */
+		m_ProjectionMatrix = glm::mat4(1.0f);
+		m_ViewMatrix = glm::mat4(1.0f);
 		m_ModelMatrix = glm::mat4(1.0f);
 
-		m_TranslationA = glm::vec3(240, 240, 0);
-		m_ScaleA = glm::vec3(1.0, 1.0, 1.0);
+		m_TranslationA = glm::vec3(240.0f, 240.0f, 0.0f);
+		m_ScaleA = glm::vec3(1.0f, 1.0f, 1.0f);
 
-		m_TranslationB = glm::vec3(720, 240, 0);
-		m_ScaleB = glm::vec3(1.0, 1.0, 1.0);
+		m_TranslationB = glm::vec3(720.0f, 240.0f, 0.0f);
+		m_ScaleB = glm::vec3(1.0f, 1.0f, 1.0f);
 
 		/* VAO VBO setup */
 		m_VertexBuffer = new VertexBuffer(m_Vertices, 4 * 4 * sizeof(float));
@@ -74,36 +74,50 @@ namespace test {
 	{
 		//Texture A
 		{
+			m_ProjectionMatrix = glm::mat4(1.0f);
+			m_ViewMatrix = glm::mat4(1.0f);
+			m_ModelMatrix = glm::mat4(1.0f);
+
+			m_ProjectionMatrix = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
+			m_ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 			m_ModelMatrix = glm::translate(glm::mat4(1.0f), m_TranslationA);
 			m_ModelMatrix = glm::scale(m_ModelMatrix, m_ScaleA);
 			glm::mat4 mvp = m_ProjectionMatrix * m_ViewMatrix * m_ModelMatrix;
+
 			m_Shader->Bind();
 			m_Shader->SetUniformMat4f("u_MVP", mvp);
+
 			m_Renderer->Draw(*m_VertexArray, *m_IndexBuffer, *m_Shader);
-			m_ModelMatrix = glm::mat4(1.0f);
 		}
 		//Texture B
 		{
+			m_ProjectionMatrix = glm::mat4(1.0f);
+			m_ViewMatrix = glm::mat4(1.0f);
+			m_ModelMatrix = glm::mat4(1.0f);
+
+			m_ProjectionMatrix = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
+			m_ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 			m_ModelMatrix = glm::translate(glm::mat4(1.0f), m_TranslationB);
 			m_ModelMatrix = glm::scale(m_ModelMatrix, m_ScaleB);
 			glm::mat4 mvp = m_ProjectionMatrix * m_ViewMatrix * m_ModelMatrix;
+
 			m_Shader->Bind();
 			m_Shader->SetUniformMat4f("u_MVP", mvp);
+
 			m_Renderer->Draw(*m_VertexArray, *m_IndexBuffer, *m_Shader);
-			m_ModelMatrix = glm::mat4(1.0f);
 		}
 		
 	}
 
 	void Test2DTransform::OnImGuiRender()
 	{
-		ImGui::Text("Snoop Dogg A");
+		ImGui::Text("Texture A");
 		ImGui::SliderFloat("X Translation A", &m_TranslationA.x, 0.0f, 960.0f);
 		ImGui::SliderFloat("Y Translation A", &m_TranslationA.y, 0.0f, 540.0f);
 		ImGui::SliderFloat("X Scale A", &m_ScaleA.x, 0.1f, 10.0f);
 		ImGui::SliderFloat("Y Scale A", &m_ScaleA.y, 0.1f, 10.0f);
 
-		ImGui::Text("Snoop Dogg B");
+		ImGui::Text("Texture B");
 		ImGui::SliderFloat("X Translation B", &m_TranslationB.x, 0.0f, 960.0f);
 		ImGui::SliderFloat("Y Translation B", &m_TranslationB.y, 0.0f, 540.0f);
 		ImGui::SliderFloat("X Scale B", &m_ScaleB.x, 0.1f, 10.0f);

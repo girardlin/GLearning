@@ -9,6 +9,8 @@
 #include "Shader.h"
 #include "Texture.h"
 
+#include "Renderer.h"
+
 #include "glm.hpp"
 #include "gtc/matrix_transform.hpp"
 
