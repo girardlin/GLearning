@@ -53,7 +53,7 @@ namespace test {
 		m_ModelMatrix = glm::mat4(1.0f);
 
 		m_Scale = glm::vec3(1.0f, 1.0f, 1.0f);
-		m_Rotation = glm::vec3(0.5f, 1.0f, 0.0f);
+		m_Rotation = glm::vec3(0.5f, 1.0f, 0.001f);
 		m_Translation = glm::vec3(0.0f, 0.0f, 0.0f);
 
 		/* VAO VBO setup */
@@ -132,8 +132,8 @@ namespace test {
 	{
 		ImGui::Text("Cube");
 		ImGui::SliderFloat3("Translation", &m_Translation.x, -2.0f, 2.0f);
-		ImGui::SliderFloat3("Rotation", &m_Rotation.x, 0.0f, 1.0f);
-		ImGui::SliderFloat3("Scale", &m_Scale.x, 0.0f, 1.0f);
+		ImGui::SliderFloat3("Rotation", &m_Rotation.x, 0.001f, 1.0f);
+		ImGui::SliderFloat3("Scale", &m_Scale.x, 0.001f, 1.0f);
 
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	}
