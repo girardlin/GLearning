@@ -7,6 +7,7 @@
 #include <string>
 
 #include "Renderer.h"
+#include "Window.h"
 
 #include "VertexBuffer.h"
 #include "VertexBufferLayout.h"
@@ -21,70 +22,48 @@
 #include "imgui.h"
 #include "imgui_impl_glfw_gl3.h"
 
-#include "tests/TestClearColor.h"
-#include "tests/TestTriangle.h"
-#include "tests/TestTexture.h"
-#include "tests/Test2DTransform.h"
-#include "tests/Test3DCube.h"
-#include "tests/Test3DMultiCube.h"
+#include "tests/2D/TestClearColor.h"
+#include "tests/2D/TestTriangle.h"
+#include "tests/2D/TestTexture.h"
+#include "tests/2D/Test2DTransform.h"
+#include "tests/3D/Test3DCube.h"
+#include "tests/3D/Test3DMultiCube.h"
+#include "tests/3D/Test3DMultiCubeCamera.h"
 
-#define ASSERT(x) if (!(x)) __debugbreak();
-#define GLCall(x) GLClearError();x;ASSERT(GLLogCall(#x, __FILE__, __LINE__))
+void ProcessGeneralInputs(GLFWwindow* window)
+{
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, true);
+}
 
 int main(void)
 {
-	GLFWwindow* window;
-
-	/* Initialize the library */
-	if (!glfwInit())
-		return -1;
-
-	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(960, 540, "OpenGL Learning Environment", NULL, NULL);
-	if (!window)
-	{
-		glfwTerminate();
-		return -1;
-	}
-
-	/* Make the window's context current */
-	glfwMakeContextCurrent(window);
-
-	if (glewInit() != GLEW_OK)
-	{
-		std::cout << "GLEW Initialization Error" << std::endl;
-	}
-
-	std::cout << glGetString(GL_VERSION) << std::endl;
-
-	/* v-sync and blending enabled */
-	glfwSwapInterval(1);
-	GLCall(glEnable(GL_BLEND));
-	GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-
+	Window window("OpenGL Testing Environment", 960, 540);
 	{
 		/* instantiate renderer */
 		Renderer renderer;
 
 		/* imgui context creation and intialization */
 		ImGui::CreateContext();
-		ImGui_ImplGlfwGL3_Init(window, true);
+		ImGui_ImplGlfwGL3_Init(window.GetWindow(), true);
 		ImGui::StyleColorsDark();
 
+		/* test framework setup */
 		test::Test* currentTest = nullptr;
 		test::TestMenu* testMenu = new test::TestMenu(currentTest);
 		currentTest = testMenu;
 
+		/* test registration */
 		testMenu->RegisterTest<test::TestClearColor>("Clear Color");
-		testMenu->RegisterTest<test::TestTexture>("Texture");
 		testMenu->RegisterTest<test::TestTriangle>("Triangle");
+		testMenu->RegisterTest<test::TestTexture>("Texture");
 		testMenu->RegisterTest<test::Test2DTransform>("2D Transform");
 		testMenu->RegisterTest<test::Test3DCube>("3D Cube");
 		testMenu->RegisterTest<test::Test3DMultiCube>("3D Multiple Cubes");
+		testMenu->RegisterTest<test::Test3DMultiCubeCamera>("3D Multiple Cubes with Camera");
 		
-
 		/* Loop until the user closes the window */
-		while (!glfwWindowShouldClose(window))
+		while (!glfwWindowShouldClose(window.GetWindow()))
 		{
 			/* Render loop */
 			GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
@@ -92,10 +71,13 @@ int main(void)
 
 			/* imgui frame creation */
 			ImGui_ImplGlfwGL3_NewFrame();
+
 			if (currentTest)
 			{
+				ProcessGeneralInputs(window.GetWindow());
 				currentTest->OnUpdate(0.0f);
 				currentTest->OnRender();
+
 				ImGui::Begin("Test Menu");
 				if (currentTest != testMenu && ImGui::Button("<--- Back"))
 				{
@@ -110,11 +92,8 @@ int main(void)
 			ImGui::Render();
 			ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 
-			/* Swap front and back buffers */
-			glfwSwapBuffers(window);
-
-			/* Poll for and process events */
-			glfwPollEvents();
+			/* swap buffers and poll events */
+			window.Update();
 		}
 		delete testMenu;
 	}
