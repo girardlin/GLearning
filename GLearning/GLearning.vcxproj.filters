@@ -75,6 +75,15 @@
     <ClCompile Include="src\tests\3D\Test3DMultiCubeCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tests\3D\Test3DFreeCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputBridge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
@@ -154,6 +163,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\tests\3D\Test3DMultiCubeCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tests\3D\Test3DFreeCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InputBridge.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

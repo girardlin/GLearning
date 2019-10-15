@@ -59,6 +59,10 @@ namespace test {
 		   				 glm::vec3(1.5f,  -0.2f, -1.5f),
 		   				 glm::vec3(-1.3f,  1.0f, 1.5f) }
 	{
+		/* multipliers */
+		m_RotationSpeed = 1.0f;
+		m_OrbitRadius = 10.0f;
+
 		m_ProjectionMatrix = glm::mat4(1.0f);
 		m_ViewMatrix = glm::mat4(1.0f);
 		m_ModelMatrix = glm::mat4(1.0f);
@@ -67,9 +71,6 @@ namespace test {
 		m_Scale = glm::vec3(1.0f, 1.0f, 1.0f);
 		m_Rotation = glm::vec3(0.5f, 1.0f, 0.001f);
 		m_Translation = glm::vec3(0.0f, 0.0f, 0.0f);
-
-		m_RotationSpeed = 1.0f;
-		m_OrbitRadius = 10.0f;
 
 		/* VAO VBO setup */
 		m_VertexBuffer = new VertexBuffer(m_Vertices, 5 * 6 * 6 * sizeof(float));
@@ -88,9 +89,6 @@ namespace test {
 		m_Texture->Bind();
 		m_Shader->Bind();
 		m_Shader->SetUniform1i("u_Texture", 0);
-
-		/* Renderer setup */
-		m_Renderer = new Renderer();
 	}
 
 	Test3DMultiCubeCamera::~Test3DMultiCubeCamera()
@@ -105,9 +103,8 @@ namespace test {
 		delete m_VertexArray;
 		delete m_Shader;
 		delete m_Texture;
-		delete m_Renderer;
 
-		glDisable(GL_DEPTH_TEST);
+		GLCall(glDisable(GL_DEPTH_TEST));
 	}
 
 	void Test3DMultiCubeCamera::OnUpdate(float deltaTime)
@@ -119,10 +116,10 @@ namespace test {
 	{
 		//Cubes
 		{
-			glClearColor(0.1f, 0.6f, 0.2f, 1.0f);
+			GLCall(glClearColor(0.1f, 0.6f, 0.8f, 1.0f));
 
-			glEnable(GL_DEPTH_TEST);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			GLCall(glEnable(GL_DEPTH_TEST));
+			GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
 			m_ProjectionMatrix = glm::mat4(1.0f);
 			m_ViewMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f),
@@ -131,10 +128,8 @@ namespace test {
 			m_ModelMatrix = glm::mat4(1.0f);
 
 			/* orbiting camera algorithm */
-			float camX = sin(glfwGetTime()) * m_OrbitRadius;
-			float camZ = cos(glfwGetTime()) * m_OrbitRadius;
-
-
+			float camX = float(sin(glfwGetTime()) * m_OrbitRadius);
+			float camZ = float(cos(glfwGetTime()) * m_OrbitRadius);
 
 			m_ProjectionMatrix = glm::perspective(glm::radians(45.0f), 960.0f / 540.0f, 0.1f, 100.0f);
 			m_ViewMatrix = glm::translate(m_ViewMatrix, glm::vec3(0.0f, 0.0f, -3.0f));
@@ -153,7 +148,7 @@ namespace test {
 				m_Shader->Bind();
 				m_Shader->SetUniformMat4f("u_MVP", mvp);
 
-				glDrawArrays(GL_TRIANGLES, 0, 36);
+				GLCall(glDrawArrays(GL_TRIANGLES, 0, 36));
 			}
 		}
 	}

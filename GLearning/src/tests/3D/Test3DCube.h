@@ -37,8 +37,6 @@ namespace test {
 
 		Texture* m_Texture;
 
-		Renderer* m_Renderer;
-
 	public:
 		Test3DCube();
 		~Test3DCube();

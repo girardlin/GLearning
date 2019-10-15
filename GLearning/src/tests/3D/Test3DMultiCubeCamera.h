@@ -41,8 +41,6 @@ namespace test {
 
 		Texture* m_Texture;
 
-		Renderer* m_Renderer;
-
 	public:
 		Test3DMultiCubeCamera();
 		~Test3DMultiCubeCamera();

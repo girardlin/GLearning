@@ -59,6 +59,9 @@ namespace test {
 						glm::vec3( 1.5f,  0.2f, -1.5f ),
 						glm::vec3(-1.3f,  1.0f, -1.5f ) }
 	{
+		/* multipliers */
+		m_RotationSpeed = 1;
+
 		m_ProjectionMatrix = glm::mat4(1.0f);
 		m_ViewMatrix = glm::mat4(1.0f);
 		m_ModelMatrix = glm::mat4(1.0f);
@@ -66,8 +69,6 @@ namespace test {
 		m_Scale = glm::vec3(1.0f, 1.0f, 1.0f);
 		m_Rotation = glm::vec3(0.5f, 1.0f, 0.001f);
 		m_Translation = glm::vec3(0.0f, 0.0f, 0.0f);
-
-		m_RotationSpeed = 1;
 
 		/* VAO VBO setup */
 		m_VertexBuffer = new VertexBuffer(m_Vertices, 5 * 6 * 6 * sizeof(float));
@@ -87,8 +88,6 @@ namespace test {
 		m_Shader->Bind();
 		m_Shader->SetUniform1i("u_Texture", 0);
 
-		/* Renderer setup */
-		m_Renderer = new Renderer();
 	}
 
 	Test3DMultiCube::~Test3DMultiCube()
@@ -103,9 +102,8 @@ namespace test {
 		delete m_VertexArray;
 		delete m_Shader;
 		delete m_Texture;
-		delete m_Renderer;
 
-		glDisable(GL_DEPTH_TEST);
+		GLCall(glDisable(GL_DEPTH_TEST));
 	}
 
 	void Test3DMultiCube::OnUpdate(float deltaTime)
@@ -119,8 +117,8 @@ namespace test {
 		{
 			glClearColor(0.0f, 0.7f, 0.2f, 1.0f);
 
-			glEnable(GL_DEPTH_TEST);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			GLCall(glEnable(GL_DEPTH_TEST));
+			GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
 			m_ProjectionMatrix = glm::mat4(1.0f);
 			m_ViewMatrix = glm::mat4(1.0f);
@@ -142,7 +140,7 @@ namespace test {
 				m_Shader->Bind();
 				m_Shader->SetUniformMat4f("u_MVP", mvp);
 
-				glDrawArrays(GL_TRIANGLES, 0, 36);
+				GLCall(glDrawArrays(GL_TRIANGLES, 0, 36));
 			}
 		}
 	}

@@ -40,8 +40,6 @@ namespace test {
 
 		Texture* m_Texture;
 
-		Renderer* m_Renderer;
-
 	public:
 		Test3DMultiCube();
 		~Test3DMultiCube();

@@ -29,12 +29,16 @@
 #include "tests/3D/Test3DCube.h"
 #include "tests/3D/Test3DMultiCube.h"
 #include "tests/3D/Test3DMultiCubeCamera.h"
+#include "tests/3D/Test3DFreeCamera.h"
 
 void ProcessGeneralInputs(GLFWwindow* window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 }
+
+static float G_DeltaTime = 0.0f;
+static float G_LastFrame = 0.0f;
 
 int main(void)
 {
@@ -61,10 +65,16 @@ int main(void)
 		testMenu->RegisterTest<test::Test3DCube>("3D Cube");
 		testMenu->RegisterTest<test::Test3DMultiCube>("3D Multiple Cubes");
 		testMenu->RegisterTest<test::Test3DMultiCubeCamera>("3D Multiple Cubes with Camera");
+		testMenu->RegisterTest<test::Test3DFreeCamera>("3D Free Camera Test");
 		
 		/* Loop until the user closes the window */
 		while (!glfwWindowShouldClose(window.GetWindow()))
 		{
+			/* deltaTime calculation */
+			float currentFrame = glfwGetTime();
+			G_DeltaTime = currentFrame - G_LastFrame;
+			G_LastFrame = currentFrame;
+
 			/* Render loop */
 			GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
 			renderer.Clear();
@@ -75,7 +85,7 @@ int main(void)
 			if (currentTest)
 			{
 				ProcessGeneralInputs(window.GetWindow());
-				currentTest->OnUpdate(0.0f);
+				currentTest->OnUpdate(G_DeltaTime);
 				currentTest->OnRender();
 
 				ImGui::Begin("Test Menu");

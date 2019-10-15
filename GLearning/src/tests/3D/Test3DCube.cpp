@@ -73,9 +73,6 @@ namespace test {
 		m_Texture->Bind();
 		m_Shader->Bind();
 		m_Shader->SetUniform1i("u_Texture", 0);
-
-		/* Renderer setup */
-		m_Renderer = new Renderer();
 	}
 
 	Test3DCube::~Test3DCube()
@@ -90,7 +87,6 @@ namespace test {
 		delete m_VertexArray;
 		delete m_Shader;
 		delete m_Texture;
-		delete m_Renderer;
 
 		glDisable(GL_DEPTH_TEST);
 	}
@@ -104,10 +100,10 @@ namespace test {
 	{
 		//Cube
 		{
-			glClearColor(0.0f, 0.7f, 0.2f, 1.0f);
+			GLCall(glClearColor(0.0f, 0.7f, 0.2f, 1.0f));
 
-			glEnable(GL_DEPTH_TEST);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			GLCall(glEnable(GL_DEPTH_TEST));
+			GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
 			m_ProjectionMatrix = glm::mat4(1.0f);
 			m_ViewMatrix = glm::mat4(1.0f);
@@ -124,7 +120,7 @@ namespace test {
 			m_Shader->Bind();
 			m_Shader->SetUniformMat4f("u_MVP", mvp);
 
-			glDrawArrays(GL_TRIANGLES, 0, 36);
+			GLCall(glDrawArrays(GL_TRIANGLES, 0, 36));
 		}
 	}
 

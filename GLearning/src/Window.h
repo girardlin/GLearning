@@ -12,11 +12,11 @@ class Window
 private:
 	GLFWwindow* m_Window;
 	const char* m_WindowName;
-	float m_Width;
-	float m_Height;
+	int m_Width;
+	int m_Height;
 
 public:
-	Window(const char* windowName, const float& width, const float& height)
+	Window(const char* windowName, const int& width, const int& height)
 		: m_Window(nullptr), m_WindowName(windowName), m_Width(width), m_Height(height)
 	{
 		/* Initialize the library */

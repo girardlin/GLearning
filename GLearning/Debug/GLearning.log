@@ -1,20 +1,8 @@
-﻿  Application.cpp
-C:\dev\OpenGL\GLearning\GLearning\src\Window.h(34,40): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
-  IndexBuffer.cpp
-  Renderer.cpp
-  Shader.cpp
-  Texture.cpp
-  VertexArray.cpp
-  VertexBuffer.cpp
-  Test2DTransform.cpp
-  TestClearColor.cpp
-  TestTexture.cpp
-  TestTriangle.cpp
-  Test3DCube.cpp
-  Test3DMultiCube.cpp
-  Test3DMultiCubeCamera.cpp
-C:\dev\OpenGL\GLearning\GLearning\src\Window.h(34,31): warning C4244:  'argument': conversion from 'float' to 'int', possible loss of data
-C:\dev\OpenGL\GLearning\GLearning\src\tests\3D\Test3DMultiCubeCamera.cpp(134,15): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
-C:\dev\OpenGL\GLearning\GLearning\src\tests\3D\Test3DMultiCubeCamera.cpp(135,15): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+﻿  InputBridge.cpp
+C:\dev\OpenGL\GLearning\GLearning\src\InputBridge.cpp(9,13): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+C:\dev\OpenGL\GLearning\GLearning\src\InputBridge.cpp(10,13): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+C:\dev\OpenGL\GLearning\GLearning\src\InputBridge.cpp(14,71): warning C4244:  'argument': conversion from 'double' to 'const float', possible loss of data
+C:\dev\OpenGL\GLearning\GLearning\src\InputBridge.cpp(14,52): warning C4244:  'argument': conversion from 'double' to 'const float', possible loss of data
+C:\dev\OpenGL\GLearning\GLearning\src\InputBridge.cpp(16,12): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+C:\dev\OpenGL\GLearning\GLearning\src\InputBridge.cpp(17,12): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
   GLearning.vcxproj -> C:\dev\OpenGL\GLearning\Debug\GLearning.exe
