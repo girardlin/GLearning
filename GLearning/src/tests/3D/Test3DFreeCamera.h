@@ -9,7 +9,7 @@
 #include "Shader.h"
 #include "Texture.h"
 #include "Camera.h"
-#include "InputBridge.h"
+#include "InputManager.h"
 
 #include "Renderer.h"
 
@@ -33,6 +33,7 @@ namespace test {
 		glm::vec3 m_Translation;
 
 		float m_RotationSpeed;
+		float m_FOV;
 
 		VertexBuffer* m_VertexBuffer;
 		VertexBufferLayout* m_VertexBufferLayout;

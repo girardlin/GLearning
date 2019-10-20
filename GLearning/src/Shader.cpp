@@ -15,6 +15,7 @@ Shader::~Shader()
 
 ShaderProgramSource Shader::ParseShader(const std::string& filepath)
 {
+	/* parses and returns two strings: text after the keyword #shader vertex and #shader fragment */
 	std::ifstream stream(filepath);
 
 	enum class ShaderType
@@ -56,7 +57,7 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
 	GLCall(glShaderSource(id, 1, &src, nullptr));
 	GLCall(glCompileShader(id));
 
-	//Shader Error Handling
+	/* Shader Compilation Error Handling */
 	int result;
 	GLCall(glGetShaderiv(id, GL_COMPILE_STATUS, &result));
 	if (result == GL_FALSE)

@@ -114,7 +114,7 @@ namespace test {
 
 	void Test3DMultiCubeCamera::OnRender()
 	{
-		//Cubes
+		/* Cubes */
 		{
 			GLCall(glClearColor(0.1f, 0.6f, 0.8f, 1.0f));
 
@@ -122,19 +122,20 @@ namespace test {
 			GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
 			m_ProjectionMatrix = glm::mat4(1.0f);
-			m_ViewMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f),
-									   glm::vec3(0.0f, 0.0f, 0.0f),
-									   glm::vec3(0.0f, 1.0f, 0.0f));
+			m_ViewMatrix = glm::mat4(1.0f);
 			m_ModelMatrix = glm::mat4(1.0f);
 
 			/* orbiting camera algorithm */
 			float camX = float(sin(glfwGetTime()) * m_OrbitRadius);
 			float camZ = float(cos(glfwGetTime()) * m_OrbitRadius);
 
+			/* Set values for MVP matrices */
 			m_ProjectionMatrix = glm::perspective(glm::radians(45.0f), 960.0f / 540.0f, 0.1f, 100.0f);
+
 			m_ViewMatrix = glm::translate(m_ViewMatrix, glm::vec3(0.0f, 0.0f, -3.0f));
 			m_ViewMatrix = glm::lookAt(glm::vec3(camX, 0.0f, camZ), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
+			/* loop to create different model matrices and render multiple cubes */
 			for (unsigned int i = 0; i < 10; i++)
 			{
 				m_ModelMatrix = glm::mat4(1.0f);
@@ -144,6 +145,7 @@ namespace test {
 				m_ModelMatrix = glm::rotate(m_ModelMatrix, (float)glfwGetTime() * glm::radians(20.0f * (i + m_RotationSpeed)), m_Rotation);
 				m_ModelMatrix = glm::scale(m_ModelMatrix, m_Scale);
 
+				/* Matrix multiplication on CPU and set uniform to send info to shader program */
 				glm::mat4 mvp = m_ProjectionMatrix * m_ViewMatrix * m_ModelMatrix;
 				m_Shader->Bind();
 				m_Shader->SetUniformMat4f("u_MVP", mvp);

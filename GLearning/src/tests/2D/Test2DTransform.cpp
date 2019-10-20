@@ -72,7 +72,7 @@ namespace test {
 
 	void Test2DTransform::OnRender()
 	{
-		//Texture A
+		/* Texture A */
 		{
 			m_ProjectionMatrix = glm::mat4(1.0f);
 			m_ViewMatrix = glm::mat4(1.0f);
@@ -89,7 +89,7 @@ namespace test {
 
 			m_Renderer->Draw(*m_VertexArray, *m_IndexBuffer, *m_Shader);
 		}
-		//Texture B
+		/* Texture B */
 		{
 			m_ProjectionMatrix = glm::mat4(1.0f);
 			m_ViewMatrix = glm::mat4(1.0f);

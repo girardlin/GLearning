@@ -1,8 +1,2 @@
-﻿  InputBridge.cpp
-C:\dev\OpenGL\GLearning\GLearning\src\InputBridge.cpp(9,13): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
-C:\dev\OpenGL\GLearning\GLearning\src\InputBridge.cpp(10,13): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
-C:\dev\OpenGL\GLearning\GLearning\src\InputBridge.cpp(14,71): warning C4244:  'argument': conversion from 'double' to 'const float', possible loss of data
-C:\dev\OpenGL\GLearning\GLearning\src\InputBridge.cpp(14,52): warning C4244:  'argument': conversion from 'double' to 'const float', possible loss of data
-C:\dev\OpenGL\GLearning\GLearning\src\InputBridge.cpp(16,12): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
-C:\dev\OpenGL\GLearning\GLearning\src\InputBridge.cpp(17,12): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+﻿  Camera.cpp
   GLearning.vcxproj -> C:\dev\OpenGL\GLearning\Debug\GLearning.exe

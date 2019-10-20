@@ -5,8 +5,12 @@
 #include "glm.hpp"
 #include "gtc/matrix_transform.hpp"
 
-static float G_LastX = 480.0f, G_LastY = 270.0f;
-static bool G_FirstMouse = true;
+static float G_LastX = 0.0f, G_LastY = 0.0f;
+
+enum e_CameraInput
+{
+	FORWARD, BACKWARD, LEFT, RIGHT, TOGGLE_CURSOR_PRESS, TOGGLE_CURSOR_RELEASE
+};
 
 class Camera
 {
@@ -36,6 +40,6 @@ public:
 	glm::mat4 const GetViewMatrix();
 	float* GetCameraSpeedMultiplierAddress();
 
-	void ProcessKeyboardInputs(const float& deltaTime);
+	void ProcessKeyboardInput(const e_CameraInput& cameraInput, const float& deltaTime);
 	void ProcessMouseInputs(const float& offsetX, const float& offsetY);
 };
