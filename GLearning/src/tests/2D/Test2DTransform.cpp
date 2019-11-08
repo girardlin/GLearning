@@ -12,7 +12,7 @@ namespace test {
 						-50.5f,  50.5f,  0.0f,  1.0f },
 						m_Index{ 0, 1, 2, 2, 3, 0 }
 	{
-		/* matrix values */
+		/* Matrix values */
 		m_ProjectionMatrix = glm::mat4(1.0f);
 		m_ViewMatrix = glm::mat4(1.0f);
 		m_ModelMatrix = glm::mat4(1.0f);
@@ -78,7 +78,7 @@ namespace test {
 			m_ViewMatrix = glm::mat4(1.0f);
 			m_ModelMatrix = glm::mat4(1.0f);
 
-			m_ProjectionMatrix = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
+			m_ProjectionMatrix = glm::ortho(0.0f, 1600.0f, 0.0f, 900.0f, -1.0f, 1.0f);
 			m_ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 			m_ModelMatrix = glm::translate(glm::mat4(1.0f), m_TranslationA);
 			m_ModelMatrix = glm::scale(m_ModelMatrix, m_ScaleA);
@@ -95,7 +95,7 @@ namespace test {
 			m_ViewMatrix = glm::mat4(1.0f);
 			m_ModelMatrix = glm::mat4(1.0f);
 
-			m_ProjectionMatrix = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
+			m_ProjectionMatrix = glm::ortho(0.0f, 1600.0f, 0.0f, 900.0f, -1.0f, 1.0f);
 			m_ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f));
 			m_ModelMatrix = glm::translate(glm::mat4(1.0f), m_TranslationB);
 			m_ModelMatrix = glm::scale(m_ModelMatrix, m_ScaleB);
@@ -112,14 +112,16 @@ namespace test {
 	void Test2DTransform::OnImGuiRender()
 	{
 		ImGui::Text("Texture A");
-		ImGui::SliderFloat("X Translation A", &m_TranslationA.x, 0.0f, 960.0f);
-		ImGui::SliderFloat("Y Translation A", &m_TranslationA.y, 0.0f, 540.0f);
+
+		ImGui::SliderFloat("X Translation A", &m_TranslationA.x, 0.0f, 1600.0f);
+		ImGui::SliderFloat("Y Translation A", &m_TranslationA.y, 0.0f, 900.0f);
 		ImGui::SliderFloat("X Scale A", &m_ScaleA.x, 0.1f, 10.0f);
 		ImGui::SliderFloat("Y Scale A", &m_ScaleA.y, 0.1f, 10.0f);
 
 		ImGui::Text("Texture B");
-		ImGui::SliderFloat("X Translation B", &m_TranslationB.x, 0.0f, 960.0f);
-		ImGui::SliderFloat("Y Translation B", &m_TranslationB.y, 0.0f, 540.0f);
+
+		ImGui::SliderFloat("X Translation B", &m_TranslationB.x, 0.0f, 1600.0f);
+		ImGui::SliderFloat("Y Translation B", &m_TranslationB.y, 0.0f, 900.0f);
 		ImGui::SliderFloat("X Scale B", &m_ScaleB.x, 0.1f, 10.0f);
 		ImGui::SliderFloat("Y Scale B", &m_ScaleB.y, 0.1f, 10.0f);
 

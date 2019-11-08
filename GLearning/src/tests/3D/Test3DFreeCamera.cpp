@@ -59,7 +59,7 @@ namespace test {
 						 glm::vec3(1.5f,  -0.2f, -1.5f),
 						 glm::vec3(-1.3f,  1.0f, 1.5f) }
 	{
-		/* multipliers */
+		/* Multipliers */
 		m_RotationSpeed = 1.0f;
 		m_FOV = 45.0f;
 
@@ -67,7 +67,7 @@ namespace test {
 		m_ViewMatrix = glm::mat4(1.0f);
 		m_ModelMatrix = glm::mat4(1.0f);
 
-		/* cube properties */
+		/* Cube properties */
 		m_Scale = glm::vec3(1.0f, 1.0f, 1.0f);
 		m_Rotation = glm::vec3(0.5f, 1.0f, 0.001f);
 		m_Translation = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -135,7 +135,7 @@ namespace test {
 			m_ModelMatrix = glm::mat4(1.0f);
 
 			/* Set values for MVP matrices */
-			m_ProjectionMatrix = glm::perspective(glm::radians(m_FOV), 960.0f / 540.0f, 0.1f, 100.0f);
+			m_ProjectionMatrix = glm::perspective(glm::radians(m_FOV), 16.0f / 9.0f, 0.1f, 100.0f);
 
 			m_ViewMatrix = m_Camera->GetViewMatrix();
 
@@ -162,13 +162,16 @@ namespace test {
 	void Test3DFreeCamera::OnImGuiRender()
 	{
 		ImGui::Text("Free Camera Test");
+
 		ImGui::SliderFloat3("Translation", &m_Translation.x, -5.0f, 5.0f);
 		ImGui::SliderFloat3("Rotation", &m_Rotation.x, 0.001f, 1.0f);
 		ImGui::SliderFloat3("Scale", &m_Scale.x, 0.001f, 2.0f);
+		ImGui::NewLine();
+
 		ImGui::SliderFloat("Rotation Speed", &m_RotationSpeed, 0.01f, 10.0f);
-		ImGui::SliderFloat("Camera Speed", m_Camera->GetCameraSpeedMultiplierAddress(), 1.0f, 15.0f);
+		ImGui::SliderFloat("Camera Move Speed", m_Camera->GetCameraSpeedMultiplierAddress(), 1.0f, 15.0f);
 		ImGui::SliderFloat("Field of View / Zoom", &m_FOV, 10.0f, 80.0f);
-		ImGui::Text("--> HOLD C TO LOCK CURSOR <--");
+		ImGui::Text("--> HOLD RIGHT CLICK TO LOCK CURSOR <--");
 
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	}

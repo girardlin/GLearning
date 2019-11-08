@@ -71,12 +71,12 @@ void InputManager::ProcessInputs(const float& deltaTime)
 	{
 		m_AffectedCamera->ProcessKeyboardInput(RIGHT, deltaTime);
 	}
-	if (glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_C) == GLFW_PRESS) //toggle cursor on press
+	if (glfwGetMouseButton(glfwGetCurrentContext(), GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) //toggle cursor on press
 	{
 		m_AffectedCamera->ProcessKeyboardInput(TOGGLE_CURSOR_PRESS, deltaTime);
 		GLCall(glfwSetCursorPosCallback(glfwGetCurrentContext(), mouse_callback));
 	}
-	if (glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_C) == GLFW_RELEASE) //toggle cursor back on release
+	if (glfwGetMouseButton(glfwGetCurrentContext(), GLFW_MOUSE_BUTTON_RIGHT) == GLFW_RELEASE) //toggle cursor back on release
 	{
 		m_AffectedCamera->ProcessKeyboardInput(TOGGLE_CURSOR_RELEASE, deltaTime);
 		GLCall(glfwSetCursorPosCallback(glfwGetCurrentContext(), NULL));

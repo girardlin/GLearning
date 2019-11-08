@@ -59,7 +59,7 @@ namespace test {
 		   				 glm::vec3(1.5f,  -0.2f, -1.5f),
 		   				 glm::vec3(-1.3f,  1.0f, 1.5f) }
 	{
-		/* multipliers */
+		/* Multipliers */
 		m_RotationSpeed = 1.0f;
 		m_OrbitRadius = 10.0f;
 
@@ -67,7 +67,7 @@ namespace test {
 		m_ViewMatrix = glm::mat4(1.0f);
 		m_ModelMatrix = glm::mat4(1.0f);
 
-		/* cube properties */
+		/* Cube properties */
 		m_Scale = glm::vec3(1.0f, 1.0f, 1.0f);
 		m_Rotation = glm::vec3(0.5f, 1.0f, 0.001f);
 		m_Translation = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -130,7 +130,7 @@ namespace test {
 			float camZ = float(cos(glfwGetTime()) * m_OrbitRadius);
 
 			/* Set values for MVP matrices */
-			m_ProjectionMatrix = glm::perspective(glm::radians(45.0f), 960.0f / 540.0f, 0.1f, 100.0f);
+			m_ProjectionMatrix = glm::perspective(glm::radians(45.0f), 16.0f / 9.0f, 0.1f, 100.0f);
 
 			m_ViewMatrix = glm::translate(m_ViewMatrix, glm::vec3(0.0f, 0.0f, -3.0f));
 			m_ViewMatrix = glm::lookAt(glm::vec3(camX, 0.0f, camZ), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -158,9 +158,12 @@ namespace test {
 	void Test3DMultiCubeCamera::OnImGuiRender()
 	{
 		ImGui::Text("Cubes and Camera");
+
 		ImGui::SliderFloat3("Translation", &m_Translation.x, -2.0f, 2.0f);
 		ImGui::SliderFloat3("Rotation", &m_Rotation.x, 0.001f, 1.0f);
 		ImGui::SliderFloat3("Scale", &m_Scale.x, 0.001f, 2.0f);
+		ImGui::NewLine();
+
 		ImGui::SliderFloat("Rotation Speed", &m_RotationSpeed, 0.01f, 10.0f);
 		ImGui::SliderFloat("Orbit Radius", &m_OrbitRadius, 2.0f, 18.0f);
 
