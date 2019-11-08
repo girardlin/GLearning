@@ -38,6 +38,7 @@ public:
 	~Camera();
 
 	glm::mat4 const GetViewMatrix();
+	glm::vec3 const GetCameraPosition();
 	float* GetCameraSpeedMultiplierAddress();
 
 	void ProcessKeyboardInput(const e_CameraInput& cameraInput, const float& deltaTime);

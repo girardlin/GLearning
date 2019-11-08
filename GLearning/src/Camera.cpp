@@ -34,6 +34,11 @@ glm::mat4 const Camera::GetViewMatrix()
 	return glm::lookAt(m_CameraPosition, m_CameraPosition + m_CameraFront, m_CameraUp);
 }
 
+glm::vec3 const Camera::GetCameraPosition()
+{
+	return m_CameraPosition;
+}
+
 float* Camera::GetCameraSpeedMultiplierAddress()
 {
 	return &m_CameraSpeedMultiplier;

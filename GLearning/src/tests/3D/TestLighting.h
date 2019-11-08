@@ -26,6 +26,7 @@ namespace test {
 		glm::mat4 m_ProjectionMatrix;
 		glm::mat4 m_ViewMatrix;
 		glm::mat4 m_ModelMatrix;
+		glm::mat3 m_NormalMatrix;
 
 		glm::vec3 m_Scale;
 		glm::vec3 m_Rotation;

@@ -57,6 +57,7 @@ namespace test {
 		m_ProjectionMatrix = glm::mat4(1.0f);
 		m_ViewMatrix = glm::mat4(1.0f);
 		m_ModelMatrix = glm::mat4(1.0f);
+		m_NormalMatrix = glm::mat3(1.0f);
 
 		m_LightPosition = glm::vec3(1.0f, 0.0f, 0.0f);
 
@@ -86,7 +87,7 @@ namespace test {
 		m_LampVertexArray->AddBuffer(*m_VertexBuffer, *m_VertexBufferLayout);
 
 		/* Non-lamp object Texture & Shader setup */
-		m_ObjectTexture = new Texture("res/textures/dirt.jpg");
+		m_ObjectTexture = new Texture("res/textures/companion.gif");
 		m_ObjectTexture->Bind();
 
 		m_ObjectShader = new Shader("res/shaders/BasicLighting.shader");
@@ -143,7 +144,7 @@ namespace test {
 	{
 		/* Object and Lamp */
 		{
-			GLCall(glClearColor(0.1f, 0.1f, 0.1f, 1.0f));
+			GLCall(glClearColor(0.05f, 0.05f, 0.05f, 1.0f));
 
 			GLCall(glEnable(GL_DEPTH_TEST));
 			GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
@@ -169,15 +170,25 @@ namespace test {
 			m_ModelMatrix = glm::rotate(m_ModelMatrix, (float)glfwGetTime() * glm::radians(m_RotationSpeed * 20.0f), m_Rotation);
 			m_ModelMatrix = glm::scale(m_ModelMatrix, m_Scale);
 
+			/* Normal Matrix */
+			m_NormalMatrix = glm::mat3(glm::transpose(glm::inverse(m_ModelMatrix)));
+
 			/* Matrix multiplication on CPU and set uniforms to send transform and lighting info to object shader */
 			glm::mat4 MVP = m_ProjectionMatrix * m_ViewMatrix * m_ModelMatrix;
+			
 			m_ObjectShader->Bind();
+			
+			//Vertex Uniforms
 			m_ObjectShader->SetUniformMat4f("u_ModelMatrix", m_ModelMatrix);
+			m_ObjectShader->SetUniformMat3f("u_NormalMatrix", m_NormalMatrix);
 			m_ObjectShader->SetUniformMat4f("u_MVP", MVP);
+
+			//Fragment Uniforms
 			m_ObjectShader->SetUniform1f("u_AmbientMultiplier", m_AmbientMultiplier);
 			m_ObjectShader->SetUniformVec3f("u_ObjectColor", m_ObjectColor);
 			m_ObjectShader->SetUniformVec3f("u_LightColor", m_LightColor);
 			m_ObjectShader->SetUniformVec3f("u_LightPosition", m_LightPosition);
+			m_ObjectShader->SetUniformVec3f("u_ViewPosition", m_Camera->GetCameraPosition());
 
 			m_ObjectVertexArray->Bind();
 
