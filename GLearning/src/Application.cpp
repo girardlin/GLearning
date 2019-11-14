@@ -31,6 +31,7 @@
 #include "tests/3D/Test3DMultiCubeCamera.h"
 #include "tests/3D/Test3DFreeCamera.h"
 #include "tests/3D/TestLighting.h"
+#include "tests/3D/TestMaterial.h"
 
 void ProcessGeneralInputs(GLFWwindow* window)
 {
@@ -43,7 +44,7 @@ static float G_LastFrame = 0.0f;
 
 int main(void)
 {
-	Window window("OpenGL Testing Environment", 1152, 648);
+	Window window("OpenGL Testing Environment", 1600, 900);
 	{
 		/* instantiate renderer */
 		Renderer renderer;
@@ -68,6 +69,7 @@ int main(void)
 		testMenu->RegisterTest<test::Test3DMultiCubeCamera>("3D Multiple Cubes with Camera");
 		testMenu->RegisterTest<test::Test3DFreeCamera>("3D Free Camera Test");
 		testMenu->RegisterTest<test::TestLighting>("Lighting");
+		testMenu->RegisterTest<test::TestMaterial>("Materials");
 		
 		/* Loop until the user closes the window */
 		while (!glfwWindowShouldClose(window.GetWindow()))

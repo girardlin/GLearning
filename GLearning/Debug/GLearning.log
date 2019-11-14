@@ -1,3 +1,4 @@
-﻿  Application.cpp
-C:\dev\OpenGL\GLearning\GLearning\src\Application.cpp(76,23): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+﻿  TestLighting.cpp
+  TestMaterial.cpp
+  Generating Code...
   GLearning.vcxproj -> C:\dev\OpenGL\GLearning\Debug\GLearning.exe

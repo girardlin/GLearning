@@ -88,7 +88,6 @@ namespace test {
 
 		/* Non-lamp object Texture & Shader setup */
 		m_ObjectTexture = new Texture("res/textures/companion.gif");
-		m_ObjectTexture->Bind();
 
 		m_ObjectShader = new Shader("res/shaders/BasicLighting.shader");
 		m_ObjectShader->Bind();
@@ -97,7 +96,6 @@ namespace test {
 
 		/* Lamp Object Texture & Shader setup */
 		m_LampTexture = new Texture("res/textures/lamp.jpg");
-		m_LampTexture->Bind();
 
 		m_LampShader = new Shader("res/shaders/BasicLamp.shader");
 		m_LampShader->Bind();
@@ -185,14 +183,14 @@ namespace test {
 
 			//Fragment Uniforms
 			m_ObjectShader->SetUniform1f("u_AmbientMultiplier", m_AmbientMultiplier);
-			m_ObjectShader->SetUniformVec3f("u_ObjectColor", m_ObjectColor);
-			m_ObjectShader->SetUniformVec3f("u_LightColor", m_LightColor);
-			m_ObjectShader->SetUniformVec3f("u_LightPosition", m_LightPosition);
-			m_ObjectShader->SetUniformVec3f("u_ViewPosition", m_Camera->GetCameraPosition());
+			m_ObjectShader->SetUniform3f("u_ObjectColor", m_ObjectColor);
+			m_ObjectShader->SetUniform3f("u_LightColor", m_LightColor);
+			m_ObjectShader->SetUniform3f("u_LightPosition", m_LightPosition);
+			m_ObjectShader->SetUniform3f("u_ViewPosition", m_Camera->GetCameraPosition());
 
 			m_ObjectVertexArray->Bind();
 
-			m_ObjectTexture->Bind();
+			m_ObjectTexture->Bind(0);
 
 			GLCall(glDrawArrays(GL_TRIANGLES, 0, 36));
 
@@ -207,11 +205,11 @@ namespace test {
 			MVP = m_ProjectionMatrix * m_ViewMatrix * m_ModelMatrix;
 			m_LampShader->Bind();
 			m_LampShader->SetUniformMat4f("u_MVP", MVP);
-			m_LampShader->SetUniformVec3f("u_LightColor", m_LightColor);
+			m_LampShader->SetUniform3f("u_LightColor", m_LightColor);
 
 			m_LampVertexArray->Bind();
 
-			m_LampTexture->Bind();
+			m_LampTexture->Bind(0);
 
 			GLCall(glDrawArrays(GL_TRIANGLES, 0, 36));
 		}

@@ -117,7 +117,7 @@ void Shader::SetUniform3f(const std::string& name, float v1, float v2, float v3)
 	GLCall(glUniform3f(GetUniformLocation(name), v1, v2, v3));
 }
 
-void Shader::SetUniformVec3f(const std::string& name, const glm::vec3& vec)
+void Shader::SetUniform3f(const std::string& name, const glm::vec3& vec)
 {
 	GLCall(glUniform3f(GetUniformLocation(name), vec.x, vec.y, vec.z));
 }
@@ -139,6 +139,7 @@ void Shader::SetUniformMat4f(const std::string& name, const glm::mat4& matrix)
 
 int Shader::GetUniformLocation(const std::string& name)
 {
+	/* Stores uniforms in an unordered map cache to reduce number of glGetUniformLocation() calls */
 	if (m_UniformLocationCache.find(name) != m_UniformLocationCache.end())
 		return m_UniformLocationCache[name];
 
