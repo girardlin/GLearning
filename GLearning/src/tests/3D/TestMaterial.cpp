@@ -92,6 +92,8 @@ namespace test {
 		m_ObjectShader->Bind();
 		m_ObjectShader->SetUniform1i("u_Material.diffuseColor", 0);
 		m_ObjectShader->SetUniform1i("u_Material.specularColor", 1);
+		m_ObjectShader->SetUniform1f("u_Material.shininess", 256.0f);
+
 		m_ObjectShader->SetUniform3f("u_LightColor", 1.0f, 1.0f, 1.0f);
 
 		/* Lamp Object Texture & Shader setup */
@@ -184,8 +186,6 @@ namespace test {
 			m_ObjectShader->SetUniformMat4f("u_MVP", MVP);
 
 			//Fragment Uniforms
-			m_ObjectShader->SetUniform1f("u_Material.shininess", 256.0f);
-
 			m_ObjectShader->SetUniform3f("u_Light.ambientColor", 0.2f, 0.2f, 0.2f);
 			m_ObjectShader->SetUniform3f("u_Light.diffuseColor", m_LightColor);
 			m_ObjectShader->SetUniform3f("u_Light.specularColor", 1.0f, 1.0f, 1.0f);
@@ -210,6 +210,7 @@ namespace test {
 
 			/* Matrix multiplication on CPU and set uniforms to send transform and lighting info to shader */
 			MVP = m_ProjectionMatrix * m_ViewMatrix * m_ModelMatrix;
+
 			m_LampShader->Bind();
 			m_LampShader->SetUniformMat4f("u_MVP", MVP);
 			m_LampShader->SetUniform3f("u_LightColor", m_LightColor);

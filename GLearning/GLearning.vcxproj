@@ -139,6 +139,7 @@
     <ClCompile Include="src\tests\3D\Test3DFreeCamera.cpp" />
     <ClCompile Include="src\tests\3D\Test3DMultiCube.cpp" />
     <ClCompile Include="src\tests\3D\Test3DMultiCubeCamera.cpp" />
+    <ClCompile Include="src\tests\3D\TestDirectionalLighting.cpp" />
     <ClCompile Include="src\tests\3D\TestLighting.cpp" />
     <ClCompile Include="src\tests\3D\TestMaterial.cpp" />
     <ClCompile Include="src\tests\Test.cpp" />
@@ -156,6 +157,7 @@
     <None Include="res\shaders\BasicLamp.shader" />
     <None Include="res\shaders\BasicLighting.shader" />
     <None Include="res\shaders\BasicMVP.shader" />
+    <None Include="res\shaders\DirectionalLighting.shader" />
     <None Include="res\shaders\MaterialLighting.shader" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +175,7 @@
     <ClInclude Include="src\tests\3D\Test3DFreeCamera.h" />
     <ClInclude Include="src\tests\3D\Test3DMultiCube.h" />
     <ClInclude Include="src\tests\3D\Test3DMultiCubeCamera.h" />
+    <ClInclude Include="src\tests\3D\TestDirectionalLighting.h" />
     <ClInclude Include="src\tests\3D\TestLighting.h" />
     <ClInclude Include="src\tests\3D\TestMaterial.h" />
     <ClInclude Include="src\tests\Test.h" />

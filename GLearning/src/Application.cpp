@@ -32,6 +32,7 @@
 #include "tests/3D/Test3DFreeCamera.h"
 #include "tests/3D/TestLighting.h"
 #include "tests/3D/TestMaterial.h"
+#include "tests/3D/TestDirectionalLighting.h"
 
 void ProcessGeneralInputs(GLFWwindow* window)
 {
@@ -70,6 +71,7 @@ int main(void)
 		testMenu->RegisterTest<test::Test3DFreeCamera>("3D Free Camera Test");
 		testMenu->RegisterTest<test::TestLighting>("Lighting");
 		testMenu->RegisterTest<test::TestMaterial>("Materials");
+		testMenu->RegisterTest<test::TestDirectionalLighting>("Directional Lighting");
 		
 		/* Loop until the user closes the window */
 		while (!glfwWindowShouldClose(window.GetWindow()))
